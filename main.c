@@ -16,9 +16,12 @@ void menu();
 void init(Node**, int);
 void print_list(Node*);
 void delete_list(Node**);
+void reverse_list(Node**);
 void add_node_to_end(Node**);
 void delete_last_node(Node**);
+void add_node_to_start(Node**);
 void delete_specific_node(Node**);
+
 
 
 int main()
@@ -41,8 +44,11 @@ void menu(){
         printf("2 = delete the whole list.\n");
         printf("3 = delete last node.\n");
         printf("4 = delete node with certain value (input data required).\n");
-        printf("5 = print linked list. \n\n");
+        printf("5 = print linked list. \n");
+        printf("6 = add node to start (input data required).\n");
+        printf("7 = reverse linked list\n");
 
+        printf("\n");
         scanf("%d", &input);
 
         switch (input)
@@ -64,6 +70,12 @@ void menu(){
             case 5:
                 print_list(head);
                 break;
+            case 6:
+                add_node_to_start(&head);
+                break;
+            case 7:
+                reverse_list(&head);
+                break;
         }
     }
 
@@ -82,6 +94,55 @@ void print_list(Node* head)
         temp = temp->next;
     }
     printf(" NULL\n");
+}
+
+
+void reverse_list(Node** head)
+{
+    if ((*head) == NULL) //empty list
+        {
+            printf("Cant't reverse empty list.\n");
+            return;
+        }
+
+    if ((*head)->next == NULL) //list of size 1
+    {
+        printf("list of size 1 can't be reversed.\n");
+        return;
+    }
+
+
+    Node* left = *head;
+    Node* middle = left->next;
+    Node* right = middle->next;
+
+    left->next = NULL;
+
+    while (right!= NULL) //middle will be in last place of list.
+    {
+        middle->next = left;
+        left = middle;
+        middle = right;
+        right = right->next;
+    }
+
+     middle->next = left;
+    (*head) = middle; //make tail of list, the head.
+}
+
+
+void add_node_to_start(Node** head)
+{
+    printf("What number would you like to insert in the front of the list?\n");
+
+    int num;
+    scanf("%d",&num);
+
+    Node* temp;
+    init(&temp, num);
+    temp ->next = *head;
+
+    *head = temp;
 }
 
 
