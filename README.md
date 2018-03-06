@@ -11,5 +11,7 @@ Commands are:
 * 2: delete the whole list
 * 3: delete the last node
 * 4: delete node with certain data (int)
-* 5: print the list.
+* 5: print the list
+* 6: add a node to the start of the list
+* 7: reverse the list
 
